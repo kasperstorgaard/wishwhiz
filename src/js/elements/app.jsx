@@ -1,11 +1,8 @@
 var React = require('react');
-
-var AppActions = require('./../actions/app-actions');
+var AddUser = require('./users/add-user.js');
+var UsersList = require('./users/users-list.js');
 
 var APP = React.createClass({
-  handleClick: function() {
-    AppActions.createUser({});
-  },
   render: function() {
     return (
       <div>
@@ -20,10 +17,10 @@ var APP = React.createClass({
                   <a href="">action 1</a>
                 </li>
                 <li>
-                  <a href="../help/">action 2</a>
+                  <a href="">action 2</a>
                 </li>
                 <li>
-                  <a href="../help/">action 3</a>
+                  <a href="">action 3</a>
                 </li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
@@ -49,8 +46,10 @@ var APP = React.createClass({
               </div>
             </div>
           </div>
+          <AddUser />
+          <hr />
+          <UsersList />
         </div>
-        <div className="btn btn-default btn-lg" onClick={this.handleClick}>create user</div>
       </div>
     );
   }

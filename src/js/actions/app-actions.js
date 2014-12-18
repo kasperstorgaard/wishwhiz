@@ -5,9 +5,9 @@ var AppActions = {
   createUser: function(user){
     AppDispatcher.handleViewAction({
       actionType: AppConstants.CREATE_USER,
-      item: item
+      user: user
     })
   }
-}
+};
 
 module.exports = AppActions;

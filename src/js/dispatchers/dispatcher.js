@@ -1,5 +1,5 @@
 var Promise = require('es6-promise').Promise;
-var merge = require('react/lib/merge');
+var _ = require('lodash');
 
 var _callbacks = [];
 var _promises = [];
@@ -19,7 +19,7 @@ function _clearPromises() {
 };
 
 function Dispatcher() {};
-Dispatcher.prototype = merge(Dispatcher.prototype, {
+Dispatcher.prototype = _.extend({}, Dispatcher.prototype, {
   register: function(callback) {
     _callbacks.push(callback);
     return _callbacks.length - 1;

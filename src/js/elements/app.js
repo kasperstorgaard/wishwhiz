@@ -1,11 +1,8 @@
 var React = require('react');
+var AddUser = require('./users/add-user.js');
+var UsersList = require('./users/users-list.js');
 
-var AppActions = require('./../actions/app-actions');
-
-var APP = React.createClass({displayName: 'APP',
-  handleClick: function() {
-    AppActions.createUser({});
-  },
+var APP = React.createClass({displayName: "APP",
   render: function() {
     return (
       React.createElement("div", null, 
@@ -20,10 +17,10 @@ var APP = React.createClass({displayName: 'APP',
                   React.createElement("a", {href: ""}, "action 1")
                 ), 
                 React.createElement("li", null, 
-                  React.createElement("a", {href: "../help/"}, "action 2")
+                  React.createElement("a", {href: ""}, "action 2")
                 ), 
                 React.createElement("li", null, 
-                  React.createElement("a", {href: "../help/"}, "action 3")
+                  React.createElement("a", {href: ""}, "action 3")
                 )
               ), 
               React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
@@ -48,9 +45,11 @@ var APP = React.createClass({displayName: 'APP',
                 )
               )
             )
-          )
-        ), 
-        React.createElement("div", {className: "btn btn-default btn-lg", onClick: this.handleClick}, "create user")
+          ), 
+          React.createElement(AddUser, null), 
+          React.createElement("hr", null), 
+          React.createElement(UsersList, null)
+        )
       )
     );
   }
