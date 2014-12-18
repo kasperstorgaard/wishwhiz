@@ -1,0 +1,20 @@
+{
+	"browserify": {
+		"src": "./src/js/main.js",
+    "fileName": "main.min.js",
+		"dest": "dist/js"
+	},
+  "html":{
+    "src": "src/index.html",
+    "dest": "dist"
+  },
+	"less": {
+		"src": "src/less/main.less",
+    "fileName":  "main.min.css",
+		"dest": "dist/css"
+	},
+  "react": {
+    "src": "src/js/**/*.jsx",
+    "dest": "src/js"
+  }
+}
