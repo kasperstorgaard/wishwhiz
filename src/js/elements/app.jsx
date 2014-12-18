@@ -1,6 +1,11 @@
 var React = require('react');
 
+var AppActions = require('./../actions/app-actions');
+
 var APP = React.createClass({
+  handleClick: function() {
+    AppActions.createUser({});
+  },
   render: function() {
     return (
       <div>
@@ -32,6 +37,20 @@ var APP = React.createClass({
             </div>
           </div>
         </div>
+        <div className="container">
+          <div className="section" id="mainstage">
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="jumbotron">
+                  <h1>Jumbotron</h1>
+                  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                  <p><a className="btn btn-primary btn-lg">Learn more</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="btn btn-default btn-lg" onClick={this.handleClick}>create user</div>
       </div>
     );
   }
