@@ -1,5 +1,5 @@
-var AppDispatcher = require('../dispatchers/app-dispatcher.js');
-var AppConstants = require('../constants/app-constants.js');
+var AppDispatcher = require('../../dispatchers/app-dispatcher.js');
+var AppConstants = require('../../constants/app-constants.js');
 var _ = require('lodash');
 var EventEmitter = require('events').EventEmitter;
 
@@ -11,7 +11,7 @@ function _createUser(user){
   _users.push(user);
 }
 
-var AppStore = _.extend({}, EventEmitter.prototype, {
+var UserStore = _.extend({}, EventEmitter.prototype, {
   emitChange: function(){
     this.emit(CHANGE_EVENT)
   },
@@ -24,20 +24,20 @@ var AppStore = _.extend({}, EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, callback)
   },
 
-  getUsers: function(){
+  get: function(){
     return _users;
   },
 
   dispatcherIndex: AppDispatcher.register(function(payload){
-    var action = payload.action; // this is our action from handleViewAction
+    var action = payload.action;
     switch(action.actionType){
       case AppConstants.CREATE_USER:
         _createUser(payload.action.user);
         break;
     }
-    AppStore.emitChange();
+    UserStore.emitChange();
     return true;
   })
 })
 
-module.exports = AppStore;
+module.exports = UserStore;

@@ -1,22 +1,37 @@
 var React = require('react');
 var AppActions = require('../../actions/app-actions.js');
+var _ = require('lodash');
+var FormMixinFactory = require('../../mixins/form-mixin-factory');
+var FormGroup = require('../forms/form-group');
 
-var AddUser = React.createClass({displayName: "AddUser",
+var fields = {
+  'firstName': {
+    'rules': ''
+  },
+  'lastName': {
+    'rules': ''
+  }
+};
+
+var formMixin = FormMixinFactory.create(fields)
+
+var AddUser = React.createClass({displayName: 'AddUser',
+  mixins: [formMixin],
   handleClick: function(event) {
     event.preventDefault();
 
-    var name = this.refs.inputName.getDOMNode().value || '';
-    AppActions.createUser({name: name});
+    var formData = this.getFormData();
+    AppActions.createUser(formData);
   },
   render: function() {
     return (
       React.createElement("form", {className: "form-horizontal"}, 
         React.createElement("fieldset", null, 
-          React.createElement("div", {className: "form-group"}, 
-            React.createElement("label", {htmlFor: "inputName", className: "col-lg-2 control-label"}, "Name"), 
-            React.createElement("div", {className: "col-lg-10"}, 
-              React.createElement("input", {type: "text", className: "form-control", ref: "inputName", id: "inputName", placeholder: "Name"})
-            )
+          React.createElement(FormGroup, {name: "firstName", label: "First name"}, 
+            React.createElement("input", {type: "text", className: "form-control", ref: "firstName", id: "firstName", placeholder: "First name"})
+          ), 
+          React.createElement(FormGroup, {name: "lastName", label: "Last name"}, 
+            React.createElement("input", {type: "text", className: "form-control", ref: "lastName", id: "lastName", placeholder: "Last name"})
           ), 
           React.createElement("div", {className: "form-group"}, 
             React.createElement("div", {className: "col-lg-10 col-lg-offset-2"}, 

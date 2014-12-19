@@ -1,39 +1,13 @@
 var React = require('react');
 var AddUser = require('./users/add-user.js');
 var UsersList = require('./users/users-list.js');
+var Header = require('./shared/header.js');
 
-var APP = React.createClass({displayName: "APP",
+var APP = React.createClass({displayName: 'APP',
   render: function() {
     return (
       React.createElement("div", null, 
-        React.createElement("div", {className: "navbar navbar-default navbar-fixed-top"}, 
-          React.createElement("div", {className: "container"}, 
-            React.createElement("div", {className: "navbar-header"}, 
-              React.createElement("a", {href: "../", className: "navbar-brand"}, "Wishwhiz")
-            ), 
-            React.createElement("div", {className: "navbar-collapse collapse"}, 
-              React.createElement("ul", {className: "nav navbar-nav"}, 
-                React.createElement("li", null, 
-                  React.createElement("a", {href: ""}, "action 1")
-                ), 
-                React.createElement("li", null, 
-                  React.createElement("a", {href: ""}, "action 2")
-                ), 
-                React.createElement("li", null, 
-                  React.createElement("a", {href: ""}, "action 3")
-                )
-              ), 
-              React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
-                React.createElement("li", null, 
-                  React.createElement("a", {href: ""}, "login")
-                ), 
-                React.createElement("li", null, 
-                  React.createElement("a", {href: ""}, "stuff")
-                )
-              )
-            )
-          )
-        ), 
+        React.createElement(Header, null), 
         React.createElement("div", {className: "container"}, 
           React.createElement("div", {className: "section", id: "mainstage"}, 
             React.createElement("div", {className: "row"}, 
