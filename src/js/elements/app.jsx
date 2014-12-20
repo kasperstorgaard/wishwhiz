@@ -1,39 +1,13 @@
 var React = require('react');
-var AddUser = require('./users/add-user.js');
-var UsersList = require('./users/users-list.js');
+var AddUser = require('./user/add-user.js');
+var UsersList = require('./user/users-list.js');
+var Header = require('./shared/header.js');
 
 var APP = React.createClass({
   render: function() {
     return (
       <div>
-        <div className="navbar navbar-default navbar-fixed-top">
-          <div className="container">
-            <div className="navbar-header">
-              <a href="../" className="navbar-brand">Wishwhiz</a>
-            </div>
-            <div className="navbar-collapse collapse">
-              <ul className="nav navbar-nav">
-                <li>
-                  <a href="">action 1</a>
-                </li>
-                <li>
-                  <a href="">action 2</a>
-                </li>
-                <li>
-                  <a href="">action 3</a>
-                </li>
-              </ul>
-              <ul className="nav navbar-nav navbar-right">
-                <li>
-                  <a href="">login</a>
-                </li>
-                <li>
-                  <a href="">stuff</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <Header />
         <div className="container">
           <div className="section" id="mainstage">
             <div className="row">

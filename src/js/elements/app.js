@@ -1,9 +1,9 @@
 var React = require('react');
-var AddUser = require('./users/add-user.js');
-var UsersList = require('./users/users-list.js');
+var AddUser = require('./user/add-user.js');
+var UsersList = require('./user/users-list.js');
 var Header = require('./shared/header.js');
 
-var APP = React.createClass({displayName: 'APP',
+var APP = React.createClass({displayName: "APP",
   render: function() {
     return (
       React.createElement("div", null, 

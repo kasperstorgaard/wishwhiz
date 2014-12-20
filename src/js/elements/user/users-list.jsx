@@ -2,15 +2,13 @@ var React = require('react');
 var UserStore = require('../../stores/users/user-store.js');
 var StoresMixinFactory = require('../../mixins/stores-mixin-factory.js');
 
+function getUsers() {
+  return {users: UserStore.get()};
+}
 
-var storesMixin = StoresMixinFactory.create(
-  [UserStore,
-  function getUsers() {
-    return {users: UserStore.get()};
-  }]
-);
+var storesMixin = StoresMixinFactory([UserStore, getUsers]);
 
-var UsersList = React.createClass({displayName: 'UsersList',
+var UsersList = React.createClass({
   mixins: [storesMixin],
   render: function() {
     if(this.state.users.length == 0){
@@ -18,9 +16,9 @@ var UsersList = React.createClass({displayName: 'UsersList',
     }
     var users = this.state.users.map(function(user, index) {
       var userData = JSON.stringify(user);
-      return (React.createElement("li", {key: index}, userData));
+      return (<li key={index}>{userData}</li>);
     });
-    return React.createElement("ul", null, users);
+    return <ul>{users}</ul>;
   }
 });
 
