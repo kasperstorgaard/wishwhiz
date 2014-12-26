@@ -6,7 +6,11 @@ var minifycss = require('gulp-minify-css');
 var rename = require("gulp-rename");
 var sourcemaps = require('gulp-sourcemaps');
 var reload = require('browser-sync').reload;
-var handleError = require('./_handleError');
+
+function handleError(error){
+    console.log(error.toString());
+    this.emit('end');
+};
 
 var TASK_NAME = 'less';
 

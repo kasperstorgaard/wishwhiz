@@ -43,6 +43,7 @@
     "es6-promise": "^2.0.1",
     "firebase": "^2.0.6",
     "lodash": "^2.4.1",
-    "react": "^0.12.1"
+    "react": "^0.12.1",
+    "revalidator": "^0.3.1"
   }
 }

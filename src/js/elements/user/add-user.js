@@ -1,21 +1,70 @@
 var React = require('react');
 var AppActions = require('../../actions/app-actions.js');
+var ValidatorFactory = require('../../helpers/validation/validator-factory');
+var ValidationConstants = require('../../constants/validation-constants');
+
+function _createValidation () {
+  return ValidatorFactory.create([
+    { type: ValidationConstants.EMAIL, required: true },
+    { type: ValidationConstants.PASSWORD, required: true }
+  ]);
+}
 
 var AddUser = React.createClass({displayName: "AddUser",
+  getInitialState: function () {
+    return {
+      validationErrors: {}
+    };
+  },
+  _getFormData: function _getFormData (){
+    var obj = {};
+    obj[ValidationConstants.PASSWORD] =  this.refs[ValidationConstants.PASSWORD].getDOMNode().value;
+    obj[ValidationConstants.EMAIL] = this.refs[ValidationConstants.PASSWORD].getDOMNode().value;
+    return obj;
+  },
   handleClick: function(event) {
     event.preventDefault();
 
-    var name = this.refs.inputName.getDOMNode().value || '';
-    AppActions.createUser({name: name});
+    var form = this._getFormData();
+
+    var validationResponse = this.validator.validate(form);
+    console.log(validationResponse);
+
+    if(!validationResponse.valid){
+      this.setState({validationErrors: validationResponse.errors});
+    }else{
+      AppActions.createUser(form);
+    }
+  },
+  componentDidMount: function() {
+    this.validator = _createValidation();
   },
   render: function() {
     return (
       React.createElement("form", {className: "form-horizontal"}, 
         React.createElement("fieldset", null, 
-          React.createElement("div", {className: "form-group"}, 
-            React.createElement("label", {htmlFor: "inputName", className: "col-lg-2 control-label"}, "Name"), 
+          React.createElement("div", {className: "form-group" + (!this.state.validationErrors[ValidationConstants.FIRST_NAME] ? "" : " has-error")}, 
+            React.createElement("label", {htmlFor: ValidationConstants.FIRST_NAME, className: "col-lg-2 control-label"}, "First name"), 
             React.createElement("div", {className: "col-lg-10"}, 
-              React.createElement("input", {type: "text", className: "form-control", ref: "inputName", id: "inputName", placeholder: "Name"})
+              React.createElement("input", {type: "text", className: "form-control", ref: ValidationConstants.FIRST_NAME, id: ValidationConstants.FIRST_NAME, placeholder: "First name"})
+            )
+          ), 
+          React.createElement("div", {className: "form-group" + (!this.state.validationErrors[ValidationConstants.LAST_NAME] ? "" : " has-error")}, 
+            React.createElement("label", {htmlFor: ValidationConstants.LAST_NAME, className: "col-lg-2 control-label"}, "Last name"), 
+            React.createElement("div", {className: "col-lg-10"}, 
+              React.createElement("input", {type: "text", className: "form-control", ref: ValidationConstants.LAST_NAME, id: ValidationConstants.LAST_NAME, placeholder: "Last name"})
+            )
+          ), 
+          React.createElement("div", {className: "form-group" + (!this.state.validationErrors[ValidationConstants.EMAIL] ? "" : " has-error")}, 
+            React.createElement("label", {htmlFor: ValidationConstants.EMAIL, className: "col-lg-2 control-label"}, "Email"), 
+            React.createElement("div", {className: "col-lg-10"}, 
+              React.createElement("input", {type: "email", className: "form-control", ref: ValidationConstants.EMAIL, id: ValidationConstants.EMAIL, placeholder: "Email"})
+            )
+          ), 
+          React.createElement("div", {className: "form-group" + (!this.state.validationErrors[ValidationConstants.PASSWORD] ? "" : " has-error")}, 
+            React.createElement("label", {htmlFor: ValidationConstants.PASSWORD, className: "col-lg-2 control-label"}, "Password"), 
+            React.createElement("div", {className: "col-lg-10"}, 
+              React.createElement("input", {type: "password", className: "form-control", ref: ValidationConstants.PASSWORD, id: ValidationConstants.PASSWORD, placeholder: "Password"})
             )
           ), 
           React.createElement("div", {className: "form-group"}, 

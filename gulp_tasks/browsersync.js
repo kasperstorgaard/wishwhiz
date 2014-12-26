@@ -1,4 +1,5 @@
 var config = require('../gulpconfig.json').browserSync;
+var _ = require('lodash');
 
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
@@ -13,4 +14,4 @@ gulp.task(TASK_NAME, function() {
     });
 });
 
-module.exports = {name: TASK_NAME};
+module.exports = {name: TASK_NAME, watcher: _.noop };

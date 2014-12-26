@@ -4,7 +4,11 @@ var gulp = require('gulp');
 var react = require('gulp-react');
 var rename = require('gulp-rename')
 var reload = require('browser-sync').reload;
-var handleError = require('./_handleError');
+
+function handleError(error){
+    console.log(error.toString());
+    this.emit('end');
+};
 
 var TASK_NAME = 'react';
 

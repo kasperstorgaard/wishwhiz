@@ -7,11 +7,7 @@ var tasks = requireDir('./gulp_tasks');
 gulp.task('default', ['react', 'browserify', 'less', 'html']);
 
 gulp.task('serve', ['default', 'browser-sync'], function watch() {
-  _.each(tasks, function (task) {
-    if(task.watcher){
-      task.watcher();
-    }
-  });
+  _.invoke(tasks, 'watcher');
 });
 
 

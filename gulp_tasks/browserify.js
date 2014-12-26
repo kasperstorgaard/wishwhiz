@@ -8,7 +8,11 @@ var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var reload  = require('browser-sync').reload;
-var handleError = require('./_handleError');
+
+function handleError(error){
+    console.log(error.toString());
+    this.emit('end');
+};
 
 var TASK_NAME = 'browserify';
 
