@@ -6,5 +6,12 @@ module.exports = {
   "PASSWORD": {
     "type": "string",
     "minLength": 8
+  },
+  "NAME": {
+    "type": "string",
+    "minLength": 2
+  },
+  "DEFAULT": {
+    "type": "string"
   }
 };

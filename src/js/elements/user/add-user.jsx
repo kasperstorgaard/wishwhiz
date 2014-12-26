@@ -2,39 +2,53 @@ var React = require('react');
 var AppActions = require('../../actions/app-actions.js');
 var ValidatorFactory = require('../../helpers/validation/validator-factory');
 var ValidationConstants = require('../../constants/validation-constants');
+var FormField = require('./form-field.js');
+var _ = require('lodash');
 
 function _createValidation () {
   return ValidatorFactory.create([
-    { type: ValidationConstants.EMAIL, required: true },
-    { type: ValidationConstants.PASSWORD, required: true }
+    { id: 'email', type: ValidationConstants.EMAIL, required: true },
+    { id: 'password', type: ValidationConstants.PASSWORD, required: true },
+    { id: 'firstName', type: ValidationConstants.NAME, required: true },
+    { id: 'lastName', type: ValidationConstants.NAME, required: true }
   ]);
 }
 
 var AddUser = React.createClass({
   getInitialState: function () {
     return {
-      validationErrors: {}
+      validationErrors: {},
+      formData: {},
+      dirty: false
     };
   },
-  _getFormData: function _getFormData (){
-    var obj = {};
-    obj[ValidationConstants.PASSWORD] =  this.refs[ValidationConstants.PASSWORD].getDOMNode().value;
-    obj[ValidationConstants.EMAIL] = this.refs[ValidationConstants.PASSWORD].getDOMNode().value;
-    return obj;
+  fieldUpdated: function(key, value) {
+    var updatedObj = {};
+    updatedObj[key] = value;
+    var formData = _.extend(this.state.formData, updatedObj);
+
+    var formErrors = this.validateForm(formData).errors;
+    var fieldErrors = formErrors[key] || {};
+
+    this.state.validationErrors[key] = fieldErrors;
+
+    this.setState({formData: formData, validationErrors: this.state.validationErrors });
   },
-  handleClick: function(event) {
+  handleSubmit: function(event) {
     event.preventDefault();
 
-    var form = this._getFormData();
-
-    var validationResponse = this.validator.validate(form);
-    console.log(validationResponse);
-
-    if(!validationResponse.valid){
-      this.setState({validationErrors: validationResponse.errors});
+    var validationResponse = this.validateForm(this.state.formData);
+    if(validationResponse.valid){
+      this.submitForm(this.state.formData);
     }else{
-      AppActions.createUser(form);
+      this.setState({validationErrors: validationResponse.errors});
     }
+  },
+  validateForm: function(formData) {
+    return this.validator.validate(formData);
+  },
+  submitForm: function(formData) {
+    AppActions.createUser(formData);
   },
   componentDidMount: function() {
     this.validator = _createValidation();
@@ -43,33 +57,17 @@ var AddUser = React.createClass({
     return (
       <form className="form-horizontal">
         <fieldset>
-          <div className={"form-group" + (!this.state.validationErrors[ValidationConstants.FIRST_NAME] ? "" : " has-error")}>
-            <label htmlFor={ValidationConstants.FIRST_NAME} className="col-lg-2 control-label">First name</label>
-            <div className="col-lg-10">
-              <input type="text" className="form-control" ref={ValidationConstants.FIRST_NAME} id={ValidationConstants.FIRST_NAME} placeholder="First name" />
-            </div>
-          </div>
-          <div className={"form-group" + (!this.state.validationErrors[ValidationConstants.LAST_NAME] ? "" : " has-error")}>
-            <label htmlFor={ValidationConstants.LAST_NAME} className="col-lg-2 control-label">Last name</label>
-            <div className="col-lg-10">
-              <input type="text" className="form-control" ref={ValidationConstants.LAST_NAME} id={ValidationConstants.LAST_NAME} placeholder="Last name" />
-            </div>
-          </div>
-          <div className={"form-group" + (!this.state.validationErrors[ValidationConstants.EMAIL] ? "" : " has-error")}>
-            <label htmlFor={ValidationConstants.EMAIL} className="col-lg-2 control-label">Email</label>
-            <div className="col-lg-10">
-              <input type="email" className="form-control" ref={ValidationConstants.EMAIL} id={ValidationConstants.EMAIL} placeholder="Email" />
-            </div>
-          </div>
-          <div className={"form-group" + (!this.state.validationErrors[ValidationConstants.PASSWORD] ? "" : " has-error")}>
-            <label htmlFor={ValidationConstants.PASSWORD} className="col-lg-2 control-label">Password</label>
-            <div className="col-lg-10">
-              <input type="password" className="form-control" ref={ValidationConstants.PASSWORD} id={ValidationConstants.PASSWORD} placeholder="Password" />
-            </div>
-          </div>
+          <FormField id={'firstName'} name="First name" type="text" update={this.fieldUpdated}
+           placeholder="firstname" validationError={this.state.validationErrors['firstName']} />
+          <FormField id={'lastName'} name="Last name" type="text" update={this.fieldUpdated}
+           placeholder="lastname" validationError={this.state.validationErrors['lastName']} />
+          <FormField id={'email'} name="Email" type="email" update={this.fieldUpdated}
+           placeholder="email" validationError={this.state.validationErrors['email']} />
+           <FormField id={'password'} name="Password" type="password" update={this.fieldUpdated}
+           placeholder="password" validationError={this.state.validationErrors['password']} />
           <div className={"form-group"}>
             <div className="col-lg-10 col-lg-offset-2">
-              <button type="submit" className="btn btn-primary" onClick={this.handleClick}>Submit</button>
+              <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
             </div>
           </div>
         </fieldset>

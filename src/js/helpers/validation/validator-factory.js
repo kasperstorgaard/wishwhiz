@@ -7,14 +7,18 @@ function _buildSchema (fields) {
   var properties = {};
 
   _.each(fields, function (field) {
-    var validation = ValidationTypes[field.type];
+    var validation = ValidationTypes[field.type] || ValidationTypes['DEFAULT'];
     var messages = ValidationMessages[field.type];
 
-    var obj = (validation && _.cloneDeep(validation)) || {};
-    obj.messages = messages && _.cloneDeep(messages);
+    obj = validation;
+
+    if(messages){
+      obj.messages = _.cloneDeep(messages);
+    }
+
     obj.required = !!field.required;
 
-    properties[field.type] = obj;
+    properties[field.id] = obj;
   });
 
   return { properties: properties };
