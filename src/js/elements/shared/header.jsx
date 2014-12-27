@@ -1,4 +1,6 @@
 var React = require('react');
+var Link = require('react-router').Link;
+var RouteConstants = require('../../constants/route-constants.js');
 
 var Header = React.createClass({
 
@@ -7,7 +9,7 @@ var Header = React.createClass({
       <div className="navbar navbar-default navbar-fixed-top">
         <div className="container">
           <div className="navbar-header">
-            <a href="../" className="navbar-brand">Wishwhiz</a>
+            <a href="/" className="navbar-brand">Wishwhiz</a>
           </div>
           <div className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
@@ -23,10 +25,7 @@ var Header = React.createClass({
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <a href="">login</a>
-              </li>
-              <li>
-                <a href="">stuff</a>
+                <Link to={RouteConstants.LOGIN}>Login</Link>
               </li>
             </ul>
           </div>

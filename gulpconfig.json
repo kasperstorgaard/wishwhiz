@@ -1,7 +1,7 @@
 {
   "env": { "IS_DEV": true },
   "browserify": {
-    "src": "./src/js/main.js",
+    "src": "./src/js/router.js",
     "fileName": "main.min.js",
     "packageJSON": "../package.json",
     "dest": "dist/js",

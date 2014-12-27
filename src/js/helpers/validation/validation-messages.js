@@ -1,6 +1,7 @@
 var ValidationConstants = require('../../constants/validation-constants');
 
 var messages = {};
+
 messages[ValidationConstants.EMAIL] = {
   format: "please enter a valid email."
 },

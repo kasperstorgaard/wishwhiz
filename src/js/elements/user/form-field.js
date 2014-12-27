@@ -3,8 +3,10 @@ var _ = require('lodash');
 
 var Field = React.createClass({displayName: "Field",
   handleBlur: function(event) {
-    var val = this.refs.input.getDOMNode().value || '';
-    this.props.update(this.props.id, val);
+    if(this.props.update && _.isFunction(this.props.update)){
+      var val = this.refs.input.getDOMNode().value;
+      this.props.update(this.props.id, val);
+    }
   },
   getValidationMessage: function(error) {
     if(!error.message){

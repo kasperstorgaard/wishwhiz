@@ -1,4 +1,6 @@
 var React = require('react');
+var Link = require('react-router').Link;
+var RouteConstants = require('../../constants/route-constants.js');
 
 var Header = React.createClass({displayName: "Header",
 
@@ -7,7 +9,7 @@ var Header = React.createClass({displayName: "Header",
       React.createElement("div", {className: "navbar navbar-default navbar-fixed-top"}, 
         React.createElement("div", {className: "container"}, 
           React.createElement("div", {className: "navbar-header"}, 
-            React.createElement("a", {href: "../", className: "navbar-brand"}, "Wishwhiz")
+            React.createElement("a", {href: "/", className: "navbar-brand"}, "Wishwhiz")
           ), 
           React.createElement("div", {className: "navbar-collapse collapse"}, 
             React.createElement("ul", {className: "nav navbar-nav"}, 
@@ -23,10 +25,7 @@ var Header = React.createClass({displayName: "Header",
             ), 
             React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
               React.createElement("li", null, 
-                React.createElement("a", {href: ""}, "login")
-              ), 
-              React.createElement("li", null, 
-                React.createElement("a", {href: ""}, "stuff")
+                React.createElement(Link, {to: RouteConstants.LOGIN}, "Login")
               )
             )
           )
