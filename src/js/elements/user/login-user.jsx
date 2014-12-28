@@ -25,18 +25,19 @@ var LoginUser = React.createClass({
     //AppActions.createUser(formData);
   },
   render: function() {
+    var submitDisabled = _.size(this.state.formData) == 0 || _.size(this.state.validationErrors) > 0;
+    var btnClass = "btn btn-primary" + (submitDisabled ? " disabled" : "");
     return (
-      <form className="form-horizontal">
-        <h2 className="form-header">Login user</h2>
+      <form>
+        <h2 className="form-header">
+          <small><em>Already have a user?</em></small><br />Login</h2>
         <fieldset>
           <FormField id={'username'} name="Username" type="text" update={this.updateForm}
            placeholder="username" validationError={this.state.validationErrors['username']} />
            <FormField id={'password'} name="Password" type="password" update={this.updateForm}
            placeholder="password" validationError={this.state.validationErrors['password']} />
           <div className={"form-group"}>
-            <div className="col-lg-10 col-lg-offset-2">
-              <button type="submit" className="btn btn-primary" onClick={this.trySubmitForm}>Submit</button>
-            </div>
+            <button type="submit" className={btnClass} onClick={this.trySubmitForm}>Submit</button>
           </div>
         </fieldset>
       </form>

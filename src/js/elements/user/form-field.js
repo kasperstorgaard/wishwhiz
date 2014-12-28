@@ -21,12 +21,10 @@ var Field = React.createClass({displayName: "Field",
 
     return (
       React.createElement("div", {className: "form-group" + (hasError ? " has-error" : "")}, 
-        React.createElement("label", {htmlFor: this.props.id, className: "col-lg-2 control-label"}, this.props.name), 
-        React.createElement("div", {className: "col-lg-10"}, 
-          React.createElement("input", {type: this.props.type, className: "form-control", onBlur: this.handleBlur, ref: "input", 
-           id: this.props.id, placeholder: this.props.placeholder}), 
-           validationMessage
-        )
+        React.createElement("label", {htmlFor: this.props.id, className: "control-label"}, this.props.name), 
+        React.createElement("input", {type: this.props.type, className: "form-control", onBlur: this.handleBlur, ref: "input", 
+         id: this.props.id, placeholder: this.props.placeholder}), 
+         validationMessage
       )
     );
   }

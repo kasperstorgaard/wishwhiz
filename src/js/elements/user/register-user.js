@@ -27,9 +27,11 @@ var RegisterUser = React.createClass({displayName: "RegisterUser",
     AppActions.createUser(formData);
   },
   render: function() {
+    var submitDisabled = _.size(this.state.formData) == 0 || _.size(this.state.validationErrors) > 0;
+    var btnClass = "btn btn-primary" + (submitDisabled ? " disabled" : "");
     return (
-      React.createElement("form", {className: "form-horizontal"}, 
-        React.createElement("h2", {className: "form-header"}, "Register user"), 
+      React.createElement("form", null, 
+        React.createElement("h2", {className: "form-header"}, React.createElement("small", null, React.createElement("em", null, "Don't have a login?")), React.createElement("br", null), "Register"), 
         React.createElement("fieldset", null, 
           React.createElement(FormField, {id: 'username', name: "Username", type: "text", update: this.updateForm, 
            placeholder: "username", validationError: this.state.validationErrors['username']}), 
@@ -38,9 +40,7 @@ var RegisterUser = React.createClass({displayName: "RegisterUser",
            React.createElement(FormField, {id: 'password', name: "Password", type: "password", update: this.updateForm, 
            placeholder: "password", validationError: this.state.validationErrors['password']}), 
           React.createElement("div", {className: "form-group"}, 
-            React.createElement("div", {className: "col-lg-10 col-lg-offset-2"}, 
-              React.createElement("button", {type: "submit", className: "btn btn-primary", onClick: this.trySubmitForm}, "Submit")
-            )
+            React.createElement("button", {type: "submit", className: btnClass, onClick: this.trySubmitForm}, "Submit")
           )
         )
       )

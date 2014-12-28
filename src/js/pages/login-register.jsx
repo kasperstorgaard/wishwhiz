@@ -7,13 +7,15 @@ var LoginRegister = React.createClass({
   render: function() {
     return (
       <div id="login-register">
-        <div className="row">
-          <section id="login" className="col-lg-6">
-            <LoginUser />
-          </section>
-          <section id="register" className="col-lg-6">
-            <RegisterUser />
-          </section>
+        <div className="container">
+          <div className="row">
+            <section id="login" className="col-md-6">
+              <LoginUser />
+            </section>
+            <section id="register" className="col-md-6">
+              <RegisterUser />
+            </section>
+          </div>
         </div>
       </div>
     );

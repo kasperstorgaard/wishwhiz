@@ -8,7 +8,7 @@ var APP = React.createClass({
     return (
       <div>
         <Header />
-        <div className="container">
+        <div className="after-navbar">
           <RouteHandler/>
         </div>
       </div>

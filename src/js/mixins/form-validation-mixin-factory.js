@@ -4,10 +4,15 @@ function create (validator) {
     updateForm: function(key, value) {
       this.state.formData[key] = value;
 
-      var formErrors = this.validateForm(this.state.formData).errors;
-      var fieldErrors = formErrors[key] || {};
+      var validationResponse = this.validateForm(this.state.formData);
 
-      this.state.validationErrors[key] = fieldErrors;
+      if(!validationResponse.valid){
+        var formErrors = validationResponse.errors;
+        var fieldErrors = formErrors[key] || {};
+        this.state.validationErrors[key] = fieldErrors;
+      }else{
+        this.state.validationErrors = {};
+      }
 
       this.setState({formData: this.state.formData, validationErrors: this.state.validationErrors });
     },

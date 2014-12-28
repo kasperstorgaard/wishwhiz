@@ -4,7 +4,7 @@ var NotFound = React.createClass({displayName: "NotFound",
 
   render: function() {
     return (
-      React.createElement("div", {className: "container"}, React.createElement("h2", null, "Route not found"))
+      React.createElement("div", {className: "container"}, React.createElement("h2", null, "404 - Page not found"))
     );
   }
 

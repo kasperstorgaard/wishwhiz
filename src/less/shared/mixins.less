@@ -1,0 +1,5 @@
+.bg-split-middle(@col-left, @col-right) {
+  background: -webkit-linear-gradient(left,  @col-left 0%,@col-left 50%,@col-right 50%,@col-right 100%); /* Chrome10+,Safari5.1+ */
+  background: -ms-linear-gradient(left,  @col-left 0%,@col-left 50%,@col-right 50%,@col-right 100%); /* IE10+ */
+  background: linear-gradient(to right,  @col-left 0%,@col-left 50%,@col-right 50%,@col-right 100%); /* W3C */
+}

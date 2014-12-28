@@ -8,7 +8,7 @@ var APP = React.createClass({displayName: "APP",
     return (
       React.createElement("div", null, 
         React.createElement(Header, null), 
-        React.createElement("div", {className: "container"}, 
+        React.createElement("div", {className: "after-navbar"}, 
           React.createElement(RouteHandler, null)
         )
       )
