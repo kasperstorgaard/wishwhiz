@@ -22,10 +22,6 @@ var Field = React.createClass({
     if(this.hasError() && !this.state.suppressError){
       this.setState({suppressError: true});
     }
-    return this.checkIfChangedDebounced();
-  },
-  componentWillMount: function() {
-    this.checkIfChangedDebounced = _.debounce(this.checkIfChanged, this.props.keyUpValidationDelay || 1500)
   },
   getValidationMessage: function(error) {
     if(!error.message){
