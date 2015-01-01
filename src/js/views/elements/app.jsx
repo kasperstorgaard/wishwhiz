@@ -1,7 +1,6 @@
 var React = require('react');
 
-var Header = require('./shared/header.jsx');
-var Footer = require('./shared/footer.jsx');
+var Header = require('./shared/header');
 var RouteHandler = require('react-router').RouteHandler;
 
 var App = React.createClass({
@@ -10,7 +9,6 @@ var App = React.createClass({
       <div className="wrapper">
         <Header />
         <RouteHandler />
-        <Footer />
       </div>
     );
   }
