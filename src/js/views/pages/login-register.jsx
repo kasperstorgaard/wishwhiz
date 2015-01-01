@@ -20,24 +20,39 @@ var LoginRegister = React.createClass({
   onStoreChange: function() {
     this.setState({user: _getUser()});
   },
+  getSecondsSinceLogin: function(dateObj) {
+    var now = new Date();
+    return Math.floor((now - dateObj) / 1000);
+  },
   render: function() {
-    if(this.state.user) {
-      return (<div>You are already logged in</div>)
+    var innerContent;
+
+    if(this.state.user){
+      var loginTime = UserStore.getLoginTime();
+      var loggedInText = this.getSecondsSinceLogin(loginTime) <= 60 ?
+        "You have been logged in." :
+        "You are already logged in";
+
+      innerContent = (<h3>{loggedInText}</h3>);
+    }else{
+      innerContent = (
+        <div className="row">
+          <section id="login" className="col-md-6">
+            <LoginUser />
+          </section>
+          <section id="register" className="col-md-6">
+            <RegisterUser />
+          </section>
+        </div>
+      );
     }
 
     return (
-      <div id="login-register">
+      <section id="login-register">
         <div className="container">
-          <div className="row">
-            <section id="login" className="col-md-6">
-              <LoginUser />
-            </section>
-            <section id="register" className="col-md-6">
-              <RegisterUser />
-            </section>
-          </div>
+          {innerContent}
         </div>
-      </div>
+      </section>
     );
   }
 });

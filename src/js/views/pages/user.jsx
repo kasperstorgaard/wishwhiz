@@ -21,18 +21,27 @@ var User = React.createClass({
     this.setState({user: _getUser()});
   },
   render: function() {
+    var innerContent;
+
     if(!this.state.user){
-      return (
-        <div>You are not logged in, <Link to={RouteConstants.LOGIN}>login here</Link></div>
+      innerContent = (
+        <h3>You are not logged in, <Link to={RouteConstants.LOGIN}>login here</Link></h3>
+      );
+    }else{
+      var userData = JSON.stringify(this.state.user);
+      var innerContent = (
+        <pre>
+          {userData}
+        </pre>
       );
     }
 
-    var userData = JSON.stringify(this.state.user);
-
     return (
-      <div>
-        {userData}
-      </div>
+      <section id="user">
+        <div className="container">
+          {innerContent}
+        </div>
+      </section>
     );
   }
 });

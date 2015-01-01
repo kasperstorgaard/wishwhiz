@@ -7,6 +7,8 @@ var BaseStore = require('../base-store');
 
 var FirebaseRef = require('../../utilities/firebase/firebase-ref');
 
+var _loginTime;
+
 function _createUser(user){
   var baseUser = {email: user.email, password: user.password};
 
@@ -28,6 +30,7 @@ function _loginUser (user) {
         reject({error: error});
         return;
       }
+      _loginTime = new Date();
       resolve();
     })
   })
@@ -38,6 +41,7 @@ function _getUser (argument) {
 }
 
 function _logoutUser (argument) {
+  _loginTime = null;
   return FirebaseRef.unauth();
 }
 
@@ -48,6 +52,9 @@ function _emitChange () {
 var UserStore = _.extend(new BaseStore(), {
   getUser: function(){
     return _getUser();
+  },
+  getLoginTime: function() {
+    return _loginTime;
   },
   dispatcherIndex: AppDispatcher.register(function(payload){
     var action = payload.action;

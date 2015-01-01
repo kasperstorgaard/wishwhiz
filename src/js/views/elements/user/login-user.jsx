@@ -12,7 +12,7 @@ function _loginUser(formData) {
 
 var _validationConfig = [
   { id: 'password', required: true },
-  { id: 'email', required: true }
+  { id: 'email', type: ValidationConstants.EMAIL, required: true }
 ];
 var formValidationMixin = FormValidationMixinFactory.create(_validationConfig, _loginUser);
 
@@ -33,7 +33,7 @@ var LoginUser = React.createClass({
           <FormField id={'email'} name="Email" type="email" update={this.updateForm}
            placeholder="somename@somedomain.com" validationError={this.state.validationErrors['email']} />
            <FormField id={'password'} name="Password" type="password" update={this.updateForm}
-           placeholder="password" validationError={this.state.validationErrors['password']} keyupValidationDelay={100} />
+           placeholder="superSecr3tP@ssW0rd" validationError={this.state.validationErrors['password']} keyupValidationDelay={100} />
           <div className={"form-group"}>
             <button type="submit" className="btn btn-primary" onClick={this.trySubmitForm}>Submit</button>
           </div>

@@ -35,9 +35,9 @@ var RegisterUser = React.createClass({
            <FormField id={'username'} name="Username" type="text" update={this.updateForm}
            placeholder="username" validationError={this.state.validationErrors['username']} />
            <FormField id={'email'} name="Email" type="email" update={this.updateForm}
-           placeholder="email" validationError={this.state.validationErrors['email']} />
+           placeholder="somename@somedomain.com" validationError={this.state.validationErrors['email']} />
            <FormField id={'password'} name="Password" type="password" update={this.updateForm}
-           placeholder="password" validationError={this.state.validationErrors['password']} keyupValidationDelay={100} />
+           placeholder="superS3cretP@ssW0rd!" validationError={this.state.validationErrors['password']} keyupValidationDelay={100} />
           <div className={"form-group"}>
             <button type="submit" className="btn btn-primary" onClick={this.trySubmitForm}>Submit</button>
           </div>
