@@ -1,6 +1,7 @@
 var React = require('react');
 
-var Header = require('./shared/header.js');
+var Header = require('./shared/header.jsx');
+var Footer = require('./shared/footer.jsx');
 var RouteHandler = require('react-router').RouteHandler;
 
 var APP = React.createClass({
@@ -8,9 +9,10 @@ var APP = React.createClass({
     return (
       <div>
         <Header />
-        <div className="after-navbar">
+        <div className="wrapper">
           <RouteHandler/>
         </div>
+        <Footer />
       </div>
     );
   }

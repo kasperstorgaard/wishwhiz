@@ -1,12 +1,12 @@
 var React = require('react');
-var UserStore = require('../../stores/users/user-store.js');
-var StoresMixinFactory = require('../../mixins/stores-mixin-factory.js');
+var UserStore = require('../../stores/users/user-store');
+var StoresMixinFactory = require('../../mixins/stores-mixin-factory');
 
-function getUsers() {
-  return {users: UserStore.get()};
+function getUser() {
+  return {user: UserStore.getUser()};
 }
 
-var storesMixin = StoresMixinFactory([UserStore, getUsers]);
+var storesMixin = StoresMixinFactory([UserStore, getUser]);
 
 var UsersList = React.createClass({
   mixins: [storesMixin],

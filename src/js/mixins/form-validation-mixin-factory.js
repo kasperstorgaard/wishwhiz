@@ -1,4 +1,13 @@
-function create (validator) {
+var _ = require('lodash');
+var ValidatorFactory = require('../shared/validation/validator-factory');
+
+function create (validatorConfig, submitFn) {
+  if(!validatorConfig || !submitFn || !_.isFunction(submitFn)){
+    throw('invalid arguments');
+  }
+
+  var validator = ValidatorFactory.create(validatorConfig);
+
   return {
     'validator': validator,
     updateForm: function(key, value) {
@@ -20,8 +29,8 @@ function create (validator) {
       event.preventDefault();
 
       var validationResponse = this.validateForm(this.state.formData);
-      if(validationResponse.valid && this.submitForm && _.isFunction(this.submitForm)){
-        this.submitForm(this.state.formData);
+      if(validationResponse.valid){
+        submitFn(this.state.formData);
       }else{
         this.setState({validationErrors: validationResponse.errors});
       }

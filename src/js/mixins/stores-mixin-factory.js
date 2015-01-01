@@ -1,36 +1,26 @@
 var _ = require('lodash');
 
-function _getExtendedReturn (getters) {
-  var data = {};
-  _.each(getters, function(get) {
-    _.extend(data, get());
-  });
-  return data;
-}
+function create(stores) {
+  if(!stores){
+    throw("no stores in mixin");
+  }
 
-function create() {
-  var args = Array.prototype.slice.call(arguments);
-  var stores = _.map(args, function(arg){
-    return arg[0];
-  });
-  var getters = _.map(args, function(arg){
-    return arg[1];
-  });
+  if(!_.isArray(stores)){
+    stores = [stores];
+  }
 
   return {
-    getInitialState:function(){
-      return _getExtendedReturn(getters);
-    },
     componentDidMount:function(){
-      _.invoke(stores, 'addChangeListener', this._onChange);
+      if(this.onStoreChange && _.isFunction(this.onStoreChange)){
+        _.invoke(stores, 'addChangeListener', this.onStoreChange);
+      }
     },
     componentWillUnMount:function(){
-      _.invoke(stores, 'removeChangeListener', this._onChange);
-    },
-    _onChange:function(){
-      this.setState(_getExtendedReturn(getters));
+      if(this.onStoreChange && _.isFunction(this.onStoreChange)){
+        _.invoke(stores, 'removeChangeListener', this.onStoreChange);
+      }
     }
   };
 }
 
-module.exports = create;
+module.exports = {create: create};

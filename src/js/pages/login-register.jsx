@@ -1,9 +1,25 @@
 var React = require('react');
 
-var LoginUser = require('../elements/user/login-user.js');
-var RegisterUser = require('../elements/user/register-user.js');
+var LoginUser = require('../elements/user/login-user');
+var RegisterUser = require('../elements/user/register-user');
+var UserStore = require('../stores/users/user-store');
+var StoresMixinFactory = require('../mixins/stores-mixin-factory');
+
+function _getUser() {
+  return {user: UserStore.getUser()};
+}
+var storesMixin = StoresMixinFactory.create([UserStore]);
 
 var LoginRegister = React.createClass({
+  mixins: [storesMixin],
+  getInitialState: function(){
+    return {
+      user: _getUser()
+    };
+  },
+  onStoreChange: function() {
+    this.setState({user: _getUser()});
+  },
   render: function() {
     return (
       <div id="login-register">
