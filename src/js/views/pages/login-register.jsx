@@ -1,12 +1,12 @@
-var React = require('react');
+var React               = require('react');
 
-var LoginUser = require('../elements/user/login-user');
-var RegisterUser = require('../elements/user/register-user');
-var UserStore = require('../../stores/users/user-store');
-var StoresMixinFactory = require('../../utilities/mixins/stores-mixin-factory');
+var LoginUser           = require('../elements/user/login-user');
+var RegisterUser        = require('../elements/user/register-user');
+var UserStore           = require('../../stores/users/user-store');
+var StoresMixinFactory  = require('../../utilities/mixins/stores-mixin-factory');
 
 function _getUser() {
-  return {user: UserStore.getUser()};
+  return UserStore.getUser();
 }
 var storesMixin = StoresMixinFactory.create([UserStore]);
 
@@ -21,6 +21,10 @@ var LoginRegister = React.createClass({
     this.setState({user: _getUser()});
   },
   render: function() {
+    if(this.state.user) {
+      return (<div>You are already logged in</div>)
+    }
+
     return (
       <div id="login-register">
         <div className="container">

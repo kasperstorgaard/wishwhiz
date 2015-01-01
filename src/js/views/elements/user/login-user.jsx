@@ -25,8 +25,6 @@ var LoginUser = React.createClass({
     };
   },
   render: function() {
-    var submitDisabled = _.size(this.state.validationErrors) > 0;
-    var btnClass = "btn btn-primary" + (submitDisabled ? " disabled" : "");
     return (
       <form>
         <h2 className="form-header">
@@ -37,7 +35,7 @@ var LoginUser = React.createClass({
            <FormField id={'password'} name="Password" type="password" update={this.updateForm}
            placeholder="password" validationError={this.state.validationErrors['password']} keyupValidationDelay={100} />
           <div className={"form-group"}>
-            <button type="submit" className={btnClass} onClick={this.trySubmitForm}>Submit</button>
+            <button type="submit" className="btn btn-primary" onClick={this.trySubmitForm}>Submit</button>
           </div>
         </fieldset>
       </form>

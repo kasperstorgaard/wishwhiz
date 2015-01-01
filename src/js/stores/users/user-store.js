@@ -23,12 +23,12 @@ function _createUser(user){
 
 function _loginUser (user) {
   return new Promise(function(resolve, reject) {
-    FirebaseRef.authWithPassword(user, function (error, authData) {
+    FirebaseRef.authWithPassword(user, function (error) {
       if(error !== null){
         reject({error: error});
         return;
       }
-      resolve({user: authData});
+      resolve();
     })
   })
 }
@@ -41,6 +41,10 @@ function _logoutUser (argument) {
   return FirebaseRef.unauth();
 }
 
+function _emitChange () {
+  UserStore.emitChange();
+}
+
 var UserStore = _.extend(new BaseStore(), {
   getUser: function(){
     return _getUser();
@@ -49,16 +53,19 @@ var UserStore = _.extend(new BaseStore(), {
     var action = payload.action;
     switch(action.actionType){
       case AppConstants.CREATE_USER:
-        _createUser(payload.action.user);
+        _createUser(payload.action.user)
+          .then(_emitChange);
         break;
       case AppConstants.LOGIN_USER:
-        _loginUser(payload.action.user);
+        _loginUser(payload.action.user)
+          .then(_emitChange);
         break;
       case AppConstants.LOGOUT_USER:
         _logoutUser(payload.action.user);
+        _emitChange();
         break;
     }
-    UserStore.emitChange();
+
     return true;
   })
 })
