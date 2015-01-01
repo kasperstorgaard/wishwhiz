@@ -1,10 +1,10 @@
 var React = require('react');
 var Link = require('react-router').Link;
 
-var RouteConstants = require('../../constants/route-constants.js');
-var UserStore = require('../../stores/users/user-store.js');
-var StoresMixinFactory = require('../../mixins/stores-mixin-factory.js');
-var AppActions = require('../../actions/app-actions.js');
+var RouteConstants = require('../../../constants/route-constants.js');
+var UserStore = require('../../../stores/users/user-store.js');
+var StoresMixinFactory = require('../../../utilities/mixins/stores-mixin-factory.js');
+var AppActions = require('../../../actions/app-actions.js');
 
 function _getUser() {
   return {user: UserStore.getUser()};

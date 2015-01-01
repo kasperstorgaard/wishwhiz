@@ -1,14 +1,11 @@
 {
   "name": "wishwhiz",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A wishlist sharing app built with React and Firebase in the Flux architecture",
   "main": "index.js",
-  "scripts": {
-    "test": "gulp test"
-  },
   "repository": {
     "type": "git",
-    "url": "none"
+    "url": "https://github.com/kasperstorgaard/wishwhiz"
   },
   "keywords": [
     "react",
@@ -36,6 +33,7 @@
     "imagemin-pngquant": "^4.0.0",
     "reactify": "^0.17.1",
     "require-dir": "^0.1.0",
+    "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.2.1"
   },

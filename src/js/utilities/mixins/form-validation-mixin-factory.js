@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var ValidatorFactory = require('../shared/validation/validator-factory');
+var ValidatorFactory = require('../../utilities/validation/validator-factory');
 
 function create (validatorConfig, submitFn) {
   if(!validatorConfig || !submitFn || !_.isFunction(submitFn)){

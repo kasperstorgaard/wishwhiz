@@ -6,8 +6,7 @@ var tasks = requireDir('./gulp/tasks');
 
 gulp.task('default', ['browserify', 'less', 'html', 'images']);
 
-gulp.task('serve', [/*'browserify',*/'less', 'html', 'images', 'browser-sync'], function watch() {
+gulp.task('serve', ['less', 'html', 'images', 'browser-sync'], function watch() {
   _.invoke(tasks, 'watcher');
 });
-
 

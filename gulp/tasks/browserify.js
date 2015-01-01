@@ -1,13 +1,16 @@
 var config = require('../config.json').browserify;
 var env = require('../config.json').env;
 
+var _ = require('lodash');
 var browserify = require('browserify');
 var gulp = require('gulp');
 var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer')
 var uglify = require('gulp-uglify');
 var reload  = require('browser-sync').reload;
 var watchify = require('watchify');
 var reactify = require('reactify');
+var sourcemaps = require('gulp-sourcemaps');
 
 var handleError = require('../utils/handle-error');
 var bundleName = require('../utils/bundle-name');
@@ -30,11 +33,14 @@ var bundlerFactory = function(isWatching){
     var bundle = function () {
       var updateStart = Date.now();
       console.log('-- browserify: update started --');
-      bundler.bundle() // Create new bundle that uses the cache for high performance
-      .pipe(source(getBundleName()))
+      bundler.bundle()
+      .pipe(source(bundleName + '.js'))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({loadMaps: true}))
+      .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(config.dest))
       .pipe(reload({stream: true}));
-      console.log('-- browserify: update done | ', (Date.now() - updateStart) + 'ms');
+      console.log('-- browserify: update end | '+ (Date.now() - updateStart) +'ms --');
     }
 
     if(isWatching){
@@ -47,5 +53,6 @@ var bundlerFactory = function(isWatching){
 };
 
 gulp.task(TASK_NAME, bundlerFactory(false));
+gulp.task(TASK_NAME + ':serve', bundlerFactory(true));
 
 module.exports = {name: TASK_NAME, watcher: bundlerFactory(true)};

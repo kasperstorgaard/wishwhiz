@@ -4,18 +4,16 @@ var Header = require('./shared/header.jsx');
 var Footer = require('./shared/footer.jsx');
 var RouteHandler = require('react-router').RouteHandler;
 
-var APP = React.createClass({
+var App = React.createClass({
   render: function() {
     return (
-      <div>
+      <div className="wrapper">
         <Header />
-        <div className="wrapper">
-          <RouteHandler/>
-        </div>
+        <RouteHandler />
         <Footer />
       </div>
     );
   }
 });
 
-module.exports = APP;
+module.exports = App;

@@ -1,15 +1,19 @@
 var React = require('react');
 
 var RouteConstants = require('./constants/route-constants');
-var App = require('./elements/app');
 var Router = require('react-router');
 
-var Home = require('./pages/home');
-var NotFound = require('./pages/not-found');
-var LoginRegister = require('./pages/login-register');
-var User = require('./pages/user');
+var Home = require('./views/pages/home');
+var NotFound = require('./views/pages/not-found');
+var LoginRegister = require('./views/pages/login-register');
+var User = require('./views/pages/user');
 
-var Route = Router.Route, DefaultRoute = Router.DefaultRoute, NotFoundRoute = Router.NotFoundRoute;
+var App = require('./views/elements/app');
+
+var Route = Router.Route,
+DefaultRoute = Router.DefaultRoute,
+NotFoundRoute = Router.NotFoundRoute,
+RouteHandler = Router.RouteHandler;
 
 var routes = (
   <Route handler={App} path="/">
@@ -20,6 +24,8 @@ var routes = (
   </Route>
 );
 
+
+
 Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.getElementById('main'));
+  React.render(<Handler />, document.body);
 });

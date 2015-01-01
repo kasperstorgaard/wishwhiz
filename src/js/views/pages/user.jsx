@@ -1,8 +1,8 @@
 var React = require('react');
 var Link = require('react-router').Link;
 
-var UserStore = require('../stores/users/user-store');
-var RouteConstants = require('../constants/route-constants');
+var UserStore = require('../../stores/users/user-store');
+var RouteConstants = require('../../constants/route-constants');
 
 var User = React.createClass({
   render: function() {

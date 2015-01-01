@@ -1,10 +1,10 @@
 var React = require('react');
 var _ = require('lodash');
 
-var AppActions = require('../../actions/app-actions');
-var ValidationConstants = require('../../constants/validation-constants');
+var AppActions = require('../../../actions/app-actions');
+var ValidationConstants = require('../../../constants/validation-constants');
 var FormField = require('./form-field');
-var FormValidationMixinFactory = require('../../mixins/form-validation-mixin-factory');
+var FormValidationMixinFactory = require('../../../utilities/mixins/form-validation-mixin-factory');
 
 function _loginUser(formData) {
   AppActions.loginUser(formData);

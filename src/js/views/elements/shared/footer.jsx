@@ -11,7 +11,7 @@ var Footer = React.createClass({
             <li>·</li>
             <li><a href="#">some other link</a></li>
             <li>·</li>
-            <li><a href="#">contact stuff 2</a></li>
+            <li><a href="#">contact stuff 1</a></li>
             <li>·</li>
             <li><a href="#">more?</a></li>
           </ul>

@@ -5,7 +5,7 @@ var AppDispatcher = require('../../dispatchers/app-dispatcher');
 var AppConstants = require('../../constants/app-constants');
 var BaseStore = require('../base-store');
 
-var FirebaseRef = require('../../shared/firebase/firebase-ref');
+var FirebaseRef = require('../../utilities/firebase/firebase-ref');
 
 function _createUser(user){
   var baseUser = {email: user.email, password: user.password};
@@ -14,7 +14,6 @@ function _createUser(user){
     FirebaseRef.createUser(baseUser, function (error) {
       if(error !== null){
         reject({error: error});
-        console.log('test');
         return;
       }
       resolve();

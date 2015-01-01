@@ -2,8 +2,8 @@ var React = require('react');
 
 var LoginUser = require('../elements/user/login-user');
 var RegisterUser = require('../elements/user/register-user');
-var UserStore = require('../stores/users/user-store');
-var StoresMixinFactory = require('../mixins/stores-mixin-factory');
+var UserStore = require('../../stores/users/user-store');
+var StoresMixinFactory = require('../../utilities/mixins/stores-mixin-factory');
 
 function _getUser() {
   return {user: UserStore.getUser()};
