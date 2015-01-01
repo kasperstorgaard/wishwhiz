@@ -1,4 +1,4 @@
-var config = require('../gulpconfig.json').less;
+var config = require('../config.json').less;
 
 var gulp = require('gulp');
 var less = require('gulp-less');
@@ -19,7 +19,7 @@ gulp.task(TASK_NAME, function() {
     .pipe(sourcemaps.init())
     .pipe(less())
     .pipe(minifycss())
-    .pipe(rename(config.fileName))
+    .pipe(rename(config.outputName))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.dest))
     .pipe(reload({stream: true}));

@@ -1,11 +1,9 @@
 {
   "env": { "IS_DEV": true },
   "browserify": {
-    "src": "./src/js/router.js",
-    "fileName": "main.min.js",
-    "packageJSON": "../package.json",
-    "dest": "dist/js",
-    "watch": "src/js/**/*.js"
+    "src": "./src/js/router.jsx",
+    "extensions":  [".jsx"],
+    "dest": "dist/js"
   },
   "browserSync": {
     "baseDir": "./dist"
@@ -15,9 +13,14 @@
     "dest": "dist",
     "watch": "src/index.html"
   },
+  "images": {
+    "src": "src/gfx/**/*.*",
+    "dest": "dist/gfx",
+    "watch": "src/gfx/**/*.*"
+  },
   "less": {
     "src": "src/less/main.less",
-    "fileName": "main.min.css",
+    "outputName": "main.min.css",
     "dest": "dist/css",
     "watch": "src/less/**/*.less"
   },

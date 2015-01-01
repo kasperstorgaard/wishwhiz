@@ -1,4 +1,4 @@
-var config = require('../gulpconfig.json').browserSync;
+var config = require('../config.json').browserSync;
 var _ = require('lodash');
 
 var gulp = require('gulp');

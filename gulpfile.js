@@ -2,11 +2,11 @@ var requireDir = require('require-dir');
 var gulp = require('gulp');
 var _ = require('lodash');
 
-var tasks = requireDir('./gulp_tasks');
+var tasks = requireDir('./gulp/tasks');
 
-gulp.task('default', ['react', 'browserify', 'less', 'html']);
+gulp.task('default', ['browserify', 'less', 'html', 'images']);
 
-gulp.task('serve', ['default', 'browser-sync'], function watch() {
+gulp.task('serve', [/*'browserify',*/'less', 'html', 'images', 'browser-sync'], function watch() {
   _.invoke(tasks, 'watcher');
 });
 
